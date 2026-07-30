@@ -1,2 +1,24 @@
-<h1>Welcome to Home Page, {{ name}}</h1>
-<h2>This is the full home page</h2>
+<h1>Welcome to Home Page, {{ name }}</h1>
+
+<form method="get" action="">
+    <label for="searchMovie">Buscar película:</label>
+    <input type="text" id="searchMovie" name="searchMovie" value="{{ searchTerm|default:'' }}" placeholder="Título de la película" />
+    <button type="submit">Buscar</button>
+</form>
+
+<h2>Películas</h2>
+{% if movies %}
+    <ul>
+    {% for movie in movies %}
+        <li>
+            <h3>{{ movie.title }}</h3>
+            <p>{{ movie.description }}</p>
+            {% if movie.url %}
+                <p><img src="{{ movie.url }}" alt="{{ movie.title }}" style="max-width:300px; height:auto;" /></p>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encontraron películas.</p>
+{% endif %}

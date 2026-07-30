@@ -1,10 +1,20 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+from .models import Movie
 
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html', {'name': 'Sara Ruizzz <3'})
+    searchTerm = request.GET.get('searchMovie')
+    if searchTerm:
+        movies = Movie.objects.filter(title__icontains=searchTerm)
+    else:
+        movies = Movie.objects.all()
+
+    return render(request, 'home.html', {
+        'name': 'Sara Ruizzz <3',
+        'movies': movies,
+        'searchTerm': searchTerm,
+    })
 
 
 def about(request):
