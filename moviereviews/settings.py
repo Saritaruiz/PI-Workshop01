@@ -124,3 +124,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR, "static"),
+"moviesreviews/static/",
+]
