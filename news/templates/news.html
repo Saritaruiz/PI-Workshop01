@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-    <main class="container py-4">
-        <h1 class="mb-4">News</h1>
-    {% for news in newss %}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ news.headline }}</h5>
-                        <p class="card-text">{{ news.body }}</p>
-                        <p class="card-text"><small class="text-muted">{{ news.date }}</small></p>
-                    </div>
-                </div>
+{% extends 'base.html' %}
+{% block title %}News{% endblock %}
+{% block content %}
+
+<h1 class="mb-4">News</h1>
+
+{% for news in newss %}
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ news.headline }}</h5>
+                <p class="card-text">{{ news.body }}</p>
+                <p class="card-text"><small class="text-muted">{{ news.date }}</small></p>
             </div>
         </div>
-    {% empty %}
-        <p class="text-muted">No hay noticias publicadas.</p>
-    {% endfor %}
-    </main>
-</body>
-</html>
+    </div>
+</div>
+{% empty %}
+<p class="text-muted">No hay noticias publicadas.</p>
+{% endfor %}
+
+{% endblock content %}

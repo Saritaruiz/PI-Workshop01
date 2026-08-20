@@ -1,39 +1,67 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
+
+<img src="{% static 'images/home.png' %}" alt="Home" class="img-fluid">
+
 <h1>Welcome to Home Page, {{ name }}</h1>
 
 <form method="get" action="">
     <div class="mb-3">
         <label for="searchMovie">Buscar película:</label>
-        <input type="text" id="searchMovie" name="searchMovie" value="{{ searchTerm|default:'' }}" placeholder="Título de la película" />
+        <input 
+            type="text" 
+            id="searchMovie" 
+            name="searchMovie" 
+            value="{{ searchTerm|default:'' }}" 
+            placeholder="Título de la película"
+        />
     </div>
+
     <button type="submit" class="btn btn-primary">Buscar</button>
 </form>
 
 <h2>Películas</h2>
+
 {% if movies %}
     <div class="row g-4">
-    {% for movie in movies %}
-        <div class="col-12 col-md-4">
-            <div class="card h-100">
-                <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ movie.title }}</h5>
-                    <p class="card-text">{{ movie.description }}</p>
-                    <p class="card-text"><strong>Género:</strong> {{ movie.genre }}</p>
-                    <p class="card-text"><strong>Año:</strong> {{ movie.year }}</p>
-                    {% if movie.url %}
-                        <a href="{{ movie.url }}" class="btn btn-primary">Movie Link</a>
-                    {% endif %}
+        {% for movie in movies %}
+            <div class="col-12 col-md-4">
+                <div class="card h-100">
+                    <img 
+                        src="{{ movie.image.url }}" 
+                        class="card-img-top" 
+                        alt="{{ movie.title }}"
+                    >
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.title }}</h5>
+
+                        <p class="card-text">{{ movie.description }}</p>
+
+                        <p class="card-text">
+                            <strong>Género:</strong> {{ movie.genre }}
+                        </p>
+
+                        <p class="card-text">
+                            <strong>Año:</strong> {{ movie.year }}
+                        </p>
+
+                        {% if movie.url %}
+                            <a href="{{ movie.url }}" class="btn btn-primary">
+                                Movie Link
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
     </div>
 {% else %}
     <p>No se encontraron películas.</p>
 {% endif %}
+
 {% endblock content %}
