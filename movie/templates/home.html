@@ -10,24 +10,33 @@
 <h1>Welcome to Home Page, {{ name }}</h1>
 
 <form method="get" action="">
-    <label for="searchMovie">Buscar película:</label>
-    <input type="text" id="searchMovie" name="searchMovie" value="{{ searchTerm|default:'' }}" placeholder="Título de la película" />
-    <button type="submit">Buscar</button>
+    <div class="mb-3">
+        <label for="searchMovie">Buscar película:</label>
+        <input type="text" id="searchMovie" name="searchMovie" value="{{ searchTerm|default:'' }}" placeholder="Título de la película" />
+    </div>
+    <button type="submit" class="btn btn-primary">Buscar</button>
 </form>
 
 <h2>Películas</h2>
 {% if movies %}
-    <ul>
+    <div class="row g-4">
     {% for movie in movies %}
-        <li>
-            <h3>{{ movie.title }}</h3>
-            <p>{{ movie.description }}</p>
-            {% if movie.url %}
-                <p><img src="{{ movie.url }}" alt="{{ movie.title }}" style="max-width:300px; height:auto;" /></p>
-            {% endif %}
-        </li>
+        <div class="col-12 col-md-4">
+            <div class="card h-100">
+                <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">{{ movie.description }}</p>
+                    {% if movie.url %}
+                        <a href="{{ movie.url }}" class="btn btn-primary">Movie Link</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     {% endfor %}
-    </ul>
+    </div>
 {% else %}
     <p>No se encontraron películas.</p>
 {% endif %}
+</body>
+</html>
