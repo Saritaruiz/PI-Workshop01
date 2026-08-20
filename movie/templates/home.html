@@ -27,6 +27,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }}</h5>
                     <p class="card-text">{{ movie.description }}</p>
+                    <p class="card-text"><strong>Género:</strong> {{ movie.genre }}</p>
+                    <p class="card-text"><strong>Año:</strong> {{ movie.year }}</p>
                     {% if movie.url %}
                         <a href="{{ movie.url }}" class="btn btn-primary">Movie Link</a>
                     {% endif %}
