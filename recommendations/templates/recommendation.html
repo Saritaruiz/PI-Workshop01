@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Recommendations{% endblock %}
+
+{% block content %}
+
+<h1>Sistema de Recomendación</h1>
+<p class="text-muted">
+    Describe la película que buscas y se recomendará la más parecida usando
+    embeddings y similitud de coseno.
+</p>
+
+<form method="get" action="">
+    <div class="mb-3">
+        <label for="prompt">Describe la película que buscas:</label>
+        <input
+            type="text"
+            id="prompt"
+            name="prompt"
+            class="form-control"
+            value="{{ prompt|default:'' }}"
+            placeholder="Ejemplo: película de la segunda guerra mundial"
+        />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Recomendar</button>
+</form>
+
+<hr>
+
+{% if error %}
+    <div class="alert alert-danger">
+        <strong>Error:</strong> {{ error }}
+    </div>
+{% elif movie %}
+    <h2>Película recomendada</h2>
+
+    <p>
+        Para el prompt <strong>"{{ prompt }}"</strong> —
+        similitud de coseno: <strong>{{ similarity|floatformat:4 }}</strong>
+    </p>
+
+    <div class="row g-4">
+        <div class="col-12 col-md-6">
+            <div class="card h-100">
+                <img
+                    src="{{ movie.image.url }}"
+                    class="card-img-top"
+                    alt="{{ movie.title }}"
+                >
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+
+                    <p class="card-text">{{ movie.description }}</p>
+
+                    {% if movie.genre %}
+                        <p class="card-text">
+                            <strong>Género:</strong> {{ movie.genre }}
+                        </p>
+                    {% endif %}
+
+                    {% if movie.year %}
+                        <p class="card-text">
+                            <strong>Año:</strong> {{ movie.year }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif prompt %}
+    <p>No se encontró ninguna película.</p>
+{% endif %}
+
+{% endblock content %}

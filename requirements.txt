@@ -1,0 +1,9 @@
+django
+pillow
+openai
+google-generativeai
+huggingface_hub
+python-dotenv
+numpy
+requests
+matplotlib
